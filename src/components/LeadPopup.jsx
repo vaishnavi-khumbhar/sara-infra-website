@@ -188,7 +188,7 @@ export default function LeadPopup() {
 
                 <motion.span initial={{ x: -30, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.5, ease }}
                   className="absolute left-7 top-7 hidden items-center gap-1.5 bg-gold px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.22em] text-white shadow-lg md:flex">
-                  <Sparkles size={12} className="animate-pulse" /> Exclusive for website visitors
+                  Exclusive for website visitors
                 </motion.span>
 
                 <div className="absolute inset-x-0 bottom-0 p-5 md:p-8">

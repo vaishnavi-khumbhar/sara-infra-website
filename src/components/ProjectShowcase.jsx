@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { ArrowRight, BadgePercent, MapPin, Sparkles } from 'lucide-react'
+import { ArrowRight, BadgePercent, MapPin } from 'lucide-react'
 import { projects, STATUSES, statusLabel } from '../data/projects'
 import { Link } from '../lib/router'
 import { openEnquiry } from './EnquiryModal'
 import { ProjectCard } from './blocks'
 import { Reveal, SectionHeading, ease } from './ui'
+import { STATUS_ICONS } from '../lib/statusIcons'
 
 const LIMIT = 6
 
@@ -24,20 +25,23 @@ export function HomeProjects() {
           </Reveal>
         </div>
 
-        <div className="mt-10 overflow-x-auto pb-1">
-          <div className="flex w-max gap-2 border-b border-ink/10" role="tablist" aria-label="Project status">
-            {STATUSES.map((s) => {
-              const on = tab === s.id
-              const n = projects.filter((p) => p.status === s.id).length
-              return (
-                <button key={s.id} role="tab" aria-selected={on} onClick={() => setTab(s.id)}
-                  className={`relative px-4 pb-3 pt-2 text-[12px] font-semibold uppercase tracking-[0.16em] transition-colors sm:px-6 sm:text-[13px] ${on ? 'text-ink' : 'text-charcoal/50 hover:text-ink'}`}>
-                  {s.label} <span className={`ml-1 rounded-full px-2 py-0.5 text-[10px] ${on ? 'bg-gold text-white' : 'bg-ink/10'}`}>{n}</span>
-                  {on && <motion.span layoutId="hometab" className="absolute inset-x-0 -bottom-px h-0.5 bg-gold" />}
-                </button>
-              )
-            })}
-          </div>
+        <div className="mt-10 grid grid-cols-3 gap-2 md:flex md:flex-wrap" role="tablist" aria-label="Project status">
+          {STATUSES.map((st) => {
+            const on = tab === st.id
+            const n = projects.filter((p) => p.status === st.id).length
+            const Icon = STATUS_ICONS[st.id]
+            return (
+              <button key={st.id} role="tab" aria-selected={on} onClick={() => setTab(st.id)}
+                className={`group relative flex flex-col items-center gap-1.5 overflow-hidden border px-2 py-3 text-center transition-colors duration-300 md:flex-row md:gap-2.5 md:px-4 md:py-2.5 md:text-left ${on ? 'border-ink text-white' : 'border-ink/10 bg-white text-ink hover:border-gold'}`}>
+                {on && <motion.span layoutId="hometab" className="absolute inset-0 bg-ink" transition={{ type: 'spring', stiffness: 300, damping: 30 }} />}
+                <span className={`relative grid h-8 w-8 place-items-center rounded-full transition-colors ${on ? 'bg-gold text-white' : 'bg-gold/15 text-gold-dark group-hover:bg-gold group-hover:text-white'}`}>
+                  <Icon size={16} strokeWidth={1.8} />
+                </span>
+                <span className="relative text-[10px] font-semibold uppercase leading-tight tracking-[0.06em] sm:text-[11px] md:text-[12px] md:tracking-[0.12em]">{st.label}</span>
+                <span className={`relative rounded-full px-2 py-0.5 text-[10px] font-bold ${on ? 'bg-gold text-white' : 'bg-ink/10 text-ink'}`}>{n}</span>
+              </button>
+            )
+          })}
         </div>
 
         <AnimatePresence mode="wait">
@@ -85,7 +89,7 @@ export function OffersSection() {
               </Link>
               <div className="flex flex-1 flex-col p-5">
                 <span className="inline-flex items-center gap-1.5 self-start bg-gold px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.2em] text-white">
-                  <Sparkles size={11} className="animate-pulse" /> Offer
+                  Offer
                 </span>
                 <h3 className="mt-3 font-serif text-2xl leading-tight text-ivory">{p.name}</h3>
                 <span className="mt-1 flex items-center gap-1.5 text-[11px] uppercase tracking-[0.14em] text-ivory/50"><MapPin size={11} /> {p.location}</span>
@@ -100,7 +104,7 @@ export function OffersSection() {
             </motion.article>
           ))}
         </div>
-        <p className="mt-6 text-[11px] text-ivory/40">*Offers are subject to change and to terms & conditions of the respective project.</p>
+        <p className="mt-6 text-[11px] text-ivory/40">Offers are subject to change and to terms & conditions of the respective project.</p>
       </div>
     </section>
   )

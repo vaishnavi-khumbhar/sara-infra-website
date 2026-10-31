@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion'
 import {
-  MapPin, Phone, CalendarCheck, Calculator, FileText, ChevronRight, ChevronLeft, X, Play, Navigation, ArrowUpRight, Check,
+  MapPin, Phone, CalendarCheck, Calculator, FileText, Download, ChevronRight, ChevronLeft, X, Play, Navigation, ArrowUpRight, Check,
   Waves, Trees, Dumbbell, Baby, Sun, Droplets, Building2, Trophy, PartyPopper, Footprints, Armchair, Theater, Sparkles, Sofa, Maximize2,
 } from 'lucide-react'
 import { projects, PHONE, PHONE_DISPLAY, statusLabel } from '../data/projects'
@@ -111,6 +111,7 @@ export default function ProjectDetail({ id }) {
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1, duration: 0.8, ease }} className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Magnetic><button onClick={() => enquire('Site Visit')} className="btn-gold w-full sm:w-auto"><CalendarCheck size={16} /><span>Book a Site Visit</span></button></Magnetic>
               <button onClick={() => enquire('Cost Sheet')} className="btn-outline border-white/40 text-white hover:border-white hover:bg-white hover:text-ink"><Calculator size={16} /> Get Cost Sheet</button>
+              {p.brochure && <a href={p.brochure} target="_blank" rel="noopener noreferrer" download className="btn-outline border-white/40 text-white hover:border-gold hover:bg-gold"><Download size={16} /> Brochure</a>}
               {films.length > 0 && <button onClick={() => setPlaying(films[0])} className="btn-outline border-transparent text-champagne hover:text-white sm:px-3"><Play size={16} className="fill-current" /> Watch Film</button>}
             </motion.div>
           </div>
@@ -149,7 +150,11 @@ export default function ProjectDetail({ id }) {
           <div className="lg:col-span-5">
             <SectionHeading eyebrow={`${p.number} · Overview`} title={<>{p.name.split(' ')[0]} <em className="text-gold">{p.name.split(' ').slice(1).join(' ')}</em></>} intro={p.tagline} />
             <Reveal delay={0.2} className="mt-8 flex flex-wrap gap-3">
-              <button onClick={() => enquire('Brochure')} className="btn-outline border-ink text-ink hover:bg-ink hover:text-white"><FileText size={15} /> Request Brochure</button>
+              {p.brochure ? (
+                <a href={p.brochure} target="_blank" rel="noopener noreferrer" download className="btn-gold"><Download size={15} /><span>Download Brochure</span></a>
+              ) : (
+                <button onClick={() => enquire('Brochure')} className="btn-outline border-ink text-ink hover:bg-ink hover:text-white"><FileText size={15} /> Request Brochure</button>
+              )}
             </Reveal>
           </div>
           <div className="grid grid-cols-2 self-start border-l border-t border-ink/10 lg:col-span-7">
