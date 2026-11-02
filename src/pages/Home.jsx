@@ -77,7 +77,17 @@ export default function Home() {
             </Reveal>
             <Reveal delay={0.25} className="mt-10 grid grid-cols-2 gap-x-6 gap-y-8 border-t border-ink/10 pt-8 [font-variant-numeric:lining-nums]">
               <div><div className="font-serif text-4xl text-ink sm:text-5xl">₹<Counter value={27} /> Lakh</div><div className="mt-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-charcoal/55">Homes starting from</div></div>
-              <div><div className="font-serif text-4xl text-ink sm:text-5xl">1RK–2</div><div className="mt-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-charcoal/55">BHK configurations</div></div>
+
+
+<div>
+  <div className="font-serif text-2xl leading-tight text-ink sm:text-3xl lg:text-4xl">
+    1RK / 1BHK / 2BHK
+  </div>
+  <div className="mt-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-charcoal/55 sm:text-[11px]">
+    BHK Configurations
+  </div>
+</div>
+              
               <div><div className="whitespace-nowrap font-serif text-4xl text-ink sm:text-5xl">10:90</div><div className="mt-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-charcoal/55">Payment plan at Upvan</div></div>
               <div><div className="font-serif text-4xl text-ink sm:text-5xl"><Counter value={projects.length} /></div><div className="mt-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-charcoal/55">Projects across Navi Mumbai</div></div>
             </Reveal>
